@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Adivinhador de Números criado com ChatGPT por Ricky Araújo</title>
+    <meta name="description" content="IA que gera números aleatórios e você precisa adivinhá-los em 10 tentativas ou menos">
+    <style>
+      body {
+        background-color: #222222;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #game-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #aaaaaa;
+        text-align: center;
+      }
+    
+      h1 {
+        color: #444444;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+    
+      input[type="text"] {
+        background-color: #dddddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px 0;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+      }
+    
+      button {
+        background-color: #00bfff;
+        color: #ffffff;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-top: 10px;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    
+      p {
+        color: #444444;
+        font-family: Arial, sans-serif;
+        margin-top: 10px;
+      }
+    </style>
+</head>
+<body>
+  <div id="game-container">
+    <h1>Adivinhador de Números</h1>
+    <p>Eu escolhi um número entre 1 e 100. Adivinhe qual é!</p>
+    <input type="text" id="guess">
+    <button id="submit-guess">Enviar</button>
+    <p id="message"></p>
+    <p id="number-of-tries"></p>
+  </div>
+  <script>
+    const targetNumber = Math.floor(Math.random() * 100) + 1;
+    let numberOfTries = 0;
+    const submitGuess = document.getElementById("submit-guess");
+    const guess = document.getElementById("guess");
+    const message = document.getElementById("message");
+    const numberOfTriesElement = document.getElementById("number-of-tries");
+  
+    submitGuess.addEventListener("click", function() {
+      numberOfTries++;
+      numberOfTriesElement.innerHTML = `Número de tentativas: ${numberOfTries}`;
+      if (numberOfTries >= 10) {
+        message.innerHTML = `Você perdeu! O número era ${targetNumber}.`;
+        submitGuess.setAttribute("disabled", "true");
+      } else if (guess.value > targetNumber) {
+        message.innerHTML = "O número é menor!";
+      } else if (guess.value < targetNumber) {
+        message.innerHTML = "O número é maior!";
+      } else {
+        message.innerHTML = `Parabéns! Você acertou em ${numberOfTries} tentativas.`;
+        submitGuess.setAttribute("disabled", "true");
+      }
+    });
+  </script>
+</body>
+</html>
+  
